@@ -1,0 +1,8 @@
+{
+  "name": "Eek Monsters",
+  "description": "A retro-inspired game that provide the user with experience against monster waves Putting their skill up against the waves to the test.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
