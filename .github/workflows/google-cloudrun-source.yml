@@ -32,7 +32,7 @@ name: 'Deploy to Cloud Run from Source'
 on:
   push:
     branches:
-      - '"main"'
+      - main
 
 env:
   PROJECT_ID: 'project-0655fe26-0b83-4f1e-bbc' # TODO: update to your Google Cloud project ID
@@ -59,9 +59,10 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@f112390a2df9932162083945e46d439060d66ec2' # google-github-actions/auth@v2
         with:
-          workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider' # TODO: replace with your workload identity provider
+          workload_identity_provider: 'https://eek-monsters-659282345226.us-west2.run.app' # TODO: replace with your workload identity provider
 
-      - name: 'Deploy to Cloud Run'
+      - id: 'deploy-cloudrun'
+        name: 'Deploy to Cloud Run'
         uses: 'google-github-actions/deploy-cloudrun@33553064113a37d688aa6937bacbdc481580be17' # google-github-actions/deploy-cloudrun@v2
         with:
           service: '${{ env.SERVICE }}'
@@ -72,4 +73,4 @@ jobs:
       # If required, use the Cloud Run URL output in later steps
       - name: 'Show output'
         run: |-
-          echo ${{ steps.deploy.outputs.url }}
+          echo ${{ steps.deploy-cloudrun.outputs.url }}
